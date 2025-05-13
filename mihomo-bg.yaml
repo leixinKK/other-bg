@@ -44,7 +44,7 @@ dns:
 
 
 PProviders: &PProviders {type: http, interval: 43200, proxy: DIRECT, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 1800}, filter: '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'}
-auto: &auto {type: url-test, interval: 60, tolerance: 20, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all: true}
+auto: &auto {type: url-test, interval: 900, tolerance: 20, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all: true}
 #Smart: &Smart {type: smart, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 5000, max-failed-times: 5, hidden: false, include-all: true}
 FilterHK: &FilterHK '^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG))(?!.*(排除1|排除2|5x)).*$'
 FilterSG: &FilterSG '^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP))(?!.*(排除1|排除2|5x)).*$'
@@ -55,10 +55,10 @@ FilterTW: &FilterTW '^(?=.*(?i)(台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH))(?!.*(
 FilterEU: &FilterEU '^(?=.*(?i)(奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU))(?!.*(排除1|排除2|5x)).*$'
 FilterOther: &FilterOther '^(?!.*(DIRECT|美|港|坡|台|新|日|韩|奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'
 FilterAll: &FilterAll '^(?!.*(DIRECT|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
-Select: &Select {type: select, proxies: [香港智能, 台湾智能, 新加坡智能, 日本智能, 韩国智能, 美国智能, 欧洲智能, DIRECT]}
-Sel_Smart: &Sel_Smart {type: select, proxies: [♻️ 自动选择, 香港智能, 台湾智能, 新加坡智能, 日本智能, 韩国智能, 美国智能, 欧洲智能]}
-Sel_US: &Sel_US {type: select, proxies: [美国智能]}
-Sel_SG: &Sel_SG {type: select, proxies: [♻️ 自动选择,新加坡智能, 美国智能, 台湾智能, 日本智能, 韩国智能, 欧洲智能]}
+Select: &Select {type: select, proxies: [香港, 台湾, 新加坡, 日本, 韩国, 美国, 欧洲, DIRECT]}
+Sel_Smart: &Sel_Smart {type: select, proxies: [♻️ 自动选择, 香港, 台湾, 新加坡, 日本, 韩国, 美国, 欧洲]}
+Sel_US: &Sel_US {type: select, proxies: [美国]}
+Sel_SG: &Sel_SG {type: select, proxies: [♻️ 自动选择,新加坡, 美国, 台湾, 日本, 韩国, 欧洲]}
 c:    &a6 {type: http,     behavior: classical, interval: 86400}
 d:    &a5 {type: http,     behavior: domain,    interval: 86400}
 i:    &a7 {type: http,     behavior: ipcidr,    interval: 86400}
@@ -76,23 +76,23 @@ proxy-groups:
   - {name: 🚀 手动切换, <<: *Select}
   - {name: 🌏 全球加速, <<: *Sel_Smart}
   - {name: 🍎 苹果服务, <<: *Select}
-  - {name: 🤖 AI平台,   <<: *Sel_US}
-  - {name: 📟 电报消息,  <<: *Sel_SG}
-  - {name: 🎬 国际媒体,  <<: *Sel_Smart}
-  - {name: 📺 哔哩哔哩, type: select, proxies: [DIRECT, 香港智能, 台湾智能]}
+  - {name: 🤖 AI平台,  <<: *Sel_US}
+  - {name: 📟 电报消息, <<: *Sel_SG}
+  - {name: 🎬 国际媒体, <<: *Sel_Smart}
+  - {name: 📺 哔哩哔哩, type: select, proxies: [DIRECT, 香港, 台湾]}
   - {name: 🌌 谷歌服务, <<: *Sel_Smart}
   - {name: 🐦 推特服务, <<: *Sel_Smart}
   - {name: 🎮 游戏平台, <<: *Select}
   - {name: 🐟 兜底分流, <<: *Sel_Smart}
   
 ##节点分组
-  - {name: 香港智能,   <<: *auto, filter: *FilterHK, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png}
-  - {name: 台湾智能,   <<: *auto, filter: *FilterTW, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png}
-  - {name: 新加坡智能, <<: *auto, filter: *FilterSG, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Singapore.png}
-  - {name: 日本智能,   <<: *auto, filter: *FilterJP, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png}
-  - {name: 韩国智能,   <<: *auto, filter: *FilterKR, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Korea.png}
-  - {name: 美国智能,   <<: *auto, filter: *FilterUS, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png}
-  - {name: 欧洲智能,   <<: *auto, filter: *FilterEU, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/European_Union.png}
+  - {name: 香港,   <<: *auto, filter: *FilterHK, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png}
+  - {name: 台湾,   <<: *auto, filter: *FilterTW, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png}
+  - {name: 新加坡, <<: *auto, filter: *FilterSG, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Singapore.png}
+  - {name: 日本,   <<: *auto, filter: *FilterJP, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png}
+  - {name: 韩国,   <<: *auto, filter: *FilterKR, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Korea.png}
+  - {name: 美国,   <<: *auto, filter: *FilterUS, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png}
+  - {name: 欧洲,   <<: *auto, filter: *FilterEU, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/European_Union.png}
 
 rule-providers:
   Direct:      {<<: *a5, url: https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script/rule/Clash/Direct/Direct.yaml,                      path: ./ruleset/Direct.yaml       }
@@ -110,9 +110,9 @@ rule-providers:
   Telegram:    {<<: *a6, url: https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script/rule/Clash/Telegram/Telegram.yaml,                  path: ./ruleset/Telegram.yaml     }
   Twitter:     {<<: *a6, url: https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script/rule/Clash/Twitter/Twitter.yaml,                    path: ./ruleset/Twitter.yaml      }
   Game:        {<<: *a6, url: https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script/rule/Clash/Game/Game.yaml,                          path: ./ruleset/Game.yaml         }
-  Gemini:        {<<: *a6, url: https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script/rule/Clash/Gemini/Gemini.yaml,                          path: ./ruleset/Gemini.yaml         }
-  ChinaIP:     {<<: *a7, url: https://cdn.jsdelivr.net/gh/soffchen/GeoIP2-CN@release/clash-rule-provider.yml,                                     path: ./ruleset/ChinaIP.yaml      }
-  ProxyLite:   {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ProxyLite/ProxyLite.yaml,                path: ./ruleset/ProxyLite.yaml    }
+  Gemini:      {<<: *a6, url: https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script/rule/Clash/Gemini/Gemini.yaml,                      path: ./ruleset/Gemini.yaml         }
+  ChinaIP:     {<<: *a7, url: https://cdn.jsdelivr.net/gh/soffchen/GeoIP2-CN@release/clash-rule-provider.yml,                                path: ./ruleset/ChinaIP.yaml      }
+  ProxyLite:   {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ProxyLite/ProxyLite.yaml,           path: ./ruleset/ProxyLite.yaml    }
 
 rules: 
   - DOMAIN-SUFFIX,linux.do,DIRECT

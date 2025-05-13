@@ -67,8 +67,8 @@ i:    &a7 {type: http,     behavior: ipcidr,    interval: 86400}
 # 填写订阅,名称不能重复
 proxy-providers:
   bgA: {<<: *PProviders, url: '', override: {additional-prefix: '[A] '}}
-  bgB: {<<: *PProviders, url: '', override: {additional-prefix: '[B] '}}
-  bgC: {<<: *PProviders, url: '', override: {additional-prefix: '[C] '}}
+  #bgB: {<<: *PProviders, url: '', override: {additional-prefix: '[B] '}}
+  #bgC: {<<: *PProviders, url: '', override: {additional-prefix: '[C] '}}
 
 
 proxy-groups:
